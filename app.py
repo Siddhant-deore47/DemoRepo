@@ -32,7 +32,7 @@ def stocksDetails(stock):
     data['Datetime'] = data['Datetime'].str[0:19]
     return data
 
-@app.route('/')
+@app.route('/sec')
 def index():
     token = '6948125146:AAEQxTyicZ2ugJ7rGumOOaLYKDfNz_zR4TY'
     # chatid = '5128656629'
@@ -47,5 +47,8 @@ def index():
     urlGrp = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={grpId}&text={data}"
     return requests.get(urlGrp).json()
 
+@app.route('/')
+def entry():
+    return "Hello World."
 if __name__ == '__main__':
     app.run(debug=True)

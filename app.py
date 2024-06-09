@@ -67,7 +67,7 @@ def stocksDetails(stock):
             sign,top_ce,top_pe = getDataOC(close)
             top_ce = top_ce.sort_values(by='CE.openInterest',ascending=False)
             top_pe = top_pe.sort_values(by='PE.openInterest',ascending=False)
-        if float(cross) == 1.0:
+        if float(cross) != 0.0:
             #  print(row)
             details.append("Stock Name : " + stock +
                         "\nEMA_9 : " + str(ema_9) + 

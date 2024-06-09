@@ -50,7 +50,7 @@ def stocksDetails(stock):
     data['bullish'] = np.where(data['EMA_9'] > data['EMA_21'], 1.0, 0.0)
     data['crossover'] = data['bullish'].diff()
     hl = data[['Datetime','EMA_9','EMA_21','crossover','Close']]
-    new_data = hl.where(hl['crossover']== 1.0).dropna()
+    new_data = hl.where(hl['crossover']!= 0.0).dropna()
 
     new_data = new_data.sort_values(by='Datetime', ascending=False).head(1)
 
@@ -63,10 +63,9 @@ def stocksDetails(stock):
         close = row['Close']
         cross = row['crossover']
         if stock == '^NSEBANK':
+            
             flag = 1
             sign,top_ce,top_pe = getDataOC(close)
-            top_ce = top_ce.sort_values(by='CE.openInterest',ascending=False)
-            top_pe = top_pe.sort_values(by='PE.openInterest',ascending=False)
         if float(cross) != 0.0:
             #  print(row)
             details.append("Stock Name : " + stock +
@@ -218,8 +217,8 @@ def getDataOC(close):
     else:
         signal = "BULLISH"
 
-    top_3_ce = latest_row[latest_row['strikePrice'] < nearest].sort_values(by='strikePrice', ascending=False).head(5)
-    top_3_pe = latest_row[latest_row['strikePrice'] > nearest].sort_values(by='strikePrice', ascending=False).tail(5)
+    top_3_pe = latest_row[latest_row['strikePrice'] < nearest].sort_values(by='strikePrice', ascending=False).head(5)
+    top_3_ce = latest_row[latest_row['strikePrice'] > nearest].sort_values(by='strikePrice', ascending=False).tail(5)
 
     return signal,top_3_ce,top_3_pe
 

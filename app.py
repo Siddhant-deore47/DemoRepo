@@ -143,7 +143,7 @@ def scheduler_thread():
         schedule.run_pending()
         time.sleep(1)
 
-# schedule.every(1).minutes.do(index)
+schedule.every(5).minutes.do(index)
 
 @app.route('/trigger_send_message')
 def trigger_send_message():
@@ -226,5 +226,5 @@ def getDataOC(close):
 
 
 if __name__ == '__main__':
-    # threading.Thread(target=scheduler_thread, daemon=True).start()
+    threading.Thread(target=scheduler_thread, daemon=True).start()
     app.run(debug=True)

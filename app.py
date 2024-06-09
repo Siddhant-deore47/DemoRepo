@@ -65,7 +65,7 @@ def stocksDetails(stock):
         if stock == '^NSEBANK':
             
             flag = 1
-            # sign,top_ce,top_pe = getDataOC(close)
+            sign,top_ce,top_pe = getDataOC(close)
         if float(cross) != 0.0:
             #  print(row)
             details.append("Stock Name : " + stock +

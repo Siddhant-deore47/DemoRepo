@@ -134,16 +134,12 @@ def index():
     urlGrp = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={grpId}&text={formatted_text}"
     res = requests.post(urlGrp).json()
 
-    finalData = []
-    formatted_text = ''
-    data = []
-
 def scheduler_thread():
     while True:
         schedule.run_pending()
         time.sleep(1)
 
-schedule.every(5).minutes.do(trigger_send_message)
+schedule.every(5).minutes.do(index)
 
 @app.route('/trigger_send_message')
 def trigger_send_message():

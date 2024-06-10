@@ -143,7 +143,7 @@ def scheduler_thread():
         schedule.run_pending()
         time.sleep(1)
 
-schedule.every(5).minutes.do(index)
+schedule.every(5).minutes.do(/trigger_send_message)
 
 @app.route('/trigger_send_message')
 def trigger_send_message():
